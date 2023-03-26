@@ -26,8 +26,9 @@ void clear_command_buffer(char *command);
 
 // Control functions:
 void set_relay_states(char *command);
-void relay_state_changer(char relay_id, char state, int is_a_two_digit_number);
-
+void relay_state_changer(char relay_id, char state, int cursor);
+int get_operation(char *command);
+int read_operation(char *command, int cursor);
 
 
 #endif /* COMMANDER_H_ */

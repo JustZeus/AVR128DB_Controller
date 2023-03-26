@@ -5,7 +5,7 @@
  *  Author: Ricardo Zamudio C.
  */ 
 #define F_CPU                           (16000000UL)         /* using default clock 4MHz*/
-#define MAX_COMMAND_LEN 12
+#define MAX_COMMAND_LEN 20
 #include <avr/io.h>
 #include <util/delay.h>
 #include <stdio.h>

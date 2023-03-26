@@ -64,33 +64,121 @@ void clear_command_buffer(char *command){
 
 void set_relay_states(char *command){
 
-	const char delimeter = ',';
-
-	char cursor = MAIN_COMMAND_LENGTH + 1;
-	char [2] number;
-	int index = 0;
-	int is_a_two_digit_number = 0;
-	*char[] end_char;
-
-	while(end_char == BLANK_SPACE || NEW_LINE || RETURN_CARRIAGE)
+	int cursor = MAIN_COMMAND_LENGTH + 2;
+	int index = 1;
+	int operation = get_operation(command);
+	char current_char[2];
+	char number_buffer[3];
+	
+	do 
 	{
-		number[index] = command[cursor];
-		cursor++;
-		index++;
-
-		if(index==1){
-			is_a_two_digit_number=1;
-		}	
-
-		if(command[cursor] == delimeter || BLANK_SPACE)
-		{		
-			index=0;
-			printf(number);
-			printf("\r\n");
+		current_char[0]= command[cursor];
+		current_char[1]= '\0';
+		
+		if (current_char[0]== ',' || current_char[0]== ' ')
+		{
+			
+			number_buffer[0] = '0';
+			number_buffer[1] = command[cursor -1];
+			number_buffer[2]= '\0';
+			
+			printf("Delimiter noticed, relay number encountered  ");
+			printf(number_buffer);
+			printf(RETURN_CARRIAGE);
+			printf(NEW_LINE);
+			index = 0;
+			
 		}
 		
-		end_char=command[cursor];
+		if(index == 2 && current_char[0] != ' ')
+		{
+			printf("Two digit relay not supported yet, Exiting now.");
+			printf(RETURN_CARRIAGE);
+			printf(NEW_LINE);
+			break;
+		}
+		
+		cursor++;
+		index++;
+		
+		if(cursor > (20))
+		{
+			printf("ERROR 01: No state selected, try \"$ ctrl [RELAY NUMBERS] TGL\" ");
+			printf(RETURN_CARRIAGE);
+			printf(NEW_LINE);
+			break;
+		}
 	
+	} while (current_char[0] != ' ');
+	
+}
+
+int get_operation(char *command)
+{
+	char current_char[2];
+	int cursor = MAIN_COMMAND_LENGTH + 2;
+	
+	
+	while(current_char[0] != '-')
+		{
+			
+		current_char[0] = command[cursor];
+		cursor++;
+		
+		if(cursor>20)
+		{
+			printf("ERROR 02: No state operation detected");
+			printf(RETURN_CARRIAGE);
+			printf(NEW_LINE);
+			break;	
+	
+		}
 	}
 	
+	printf("Change state operation detected at cursor: %d", cursor);
+	printf(RETURN_CARRIAGE);
+	printf(NEW_LINE);
+	
+	read_operation(command, cursor);
+	
+};
+
+
+int read_operation(char *command, int cursor){
+char operation[]= "   ";
+
+for (int index = 0; index < 4; index++)
+{
+	operation[index]= command[index + cursor];
+}
+
+operation[3] = '\0';
+
+if(strcmp(operation, "tgl") == 0)
+{
+	printf("OK, TOGGLE\r\n");
+	
+}
+else if (strcmp(operation, "on ") == 0)
+{
+	printf("OK, ON STATE");
+	
+}
+else if (strcmp(operation, "off") == 0)
+{
+	printf("OK OFF STATE");
+	
+}
+else
+{
+	send_help_info();
+	clear_command_buffer(command);
+}
+printf("Change state operation: ");
+printf(operation);
+printf(RETURN_CARRIAGE);
+printf(NEW_LINE);
+
+
+
 }
