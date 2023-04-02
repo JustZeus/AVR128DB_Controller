@@ -6,6 +6,7 @@
  */
 
 #include <avr/io.h>
+#include "global_configs.h"
 
 #ifndef COMMANDER_H_
 #define COMMANDER_H_
@@ -28,5 +29,7 @@ void set_relay_states(char *command);
 void relay_state_changer(char relay_id, char state, int cursor);
 int get_operation(char *command);
 int read_operation(char *command, int cursor);
-
+void tgl_relay(char *relay_number);
+void turn_on_relay(char *relay_number);
+void turn_off_relay(char *relay_number); 
 #endif /* COMMANDER_H_ */

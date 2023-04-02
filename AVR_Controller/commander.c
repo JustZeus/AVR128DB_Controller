@@ -68,8 +68,9 @@ void set_relay_states(char *command)
 	int index = 1;
 	int operation = get_operation(command);
 	char current_char[2];
-	char number_buffer[3];
-
+	volatile char relay_number[3];
+	 
+	 
 	do
 	{
 		current_char[0] = command[cursor];
@@ -78,14 +79,24 @@ void set_relay_states(char *command)
 		if (current_char[0] == ',' || current_char[0] == ' ')
 		{
 
-			number_buffer[0] = '0';
-			number_buffer[1] = command[cursor - 1];
-			number_buffer[2] = '\0';
-
+			relay_number[0] = '0';
+			relay_number[1] = command[cursor - 1];
+			relay_number[2] = '\0';
+			
 			printf("Delimiter noticed, relay number encountered  ");
-			printf(number_buffer);
+			printf(relay_number);
 			printf(RETURN_CARRIAGE);
 			printf(NEW_LINE);
+			
+				if(operation == 0){
+					tgl_relay(relay_number);
+				}
+				if(operation == 1){
+					turn_on_relay(relay_number);
+				}
+				if(operation == 2){
+					turn_off_relay(relay_number);
+				}
 			index = 0;
 		}
 
@@ -107,6 +118,7 @@ void set_relay_states(char *command)
 			printf(NEW_LINE);
 			break;
 		}
+	
 
 	} while (current_char[0] != ' ');
 }
@@ -135,39 +147,123 @@ int get_operation(char *command)
 	printf(RETURN_CARRIAGE);
 	printf(NEW_LINE);
 
-	read_operation(command, cursor);
+	return read_operation(command, cursor);
 };
 
 int read_operation(char *command, int cursor)
 {
 	char operation[] = "   ";
-
 	for (int index = 0; index < 4; index++)
 	{
 		operation[index] = command[index + cursor];
+		if(index==1 && command[index + cursor] ==  'n' ){
+			break;
+		}
 	}
 
 	operation[3] = '\0';
-
+	printf("Change state operation: ");
+	printf(operation);
+	printf(RETURN_CARRIAGE);
+	printf(NEW_LINE);
 	if (strcmp(operation, "tgl") == 0)
 	{
-		printf("OK, TOGGLE\r\n");
+		return 0;
 	}
 	else if (strcmp(operation, "on ") == 0)
 	{
-		printf("OK, ON STATE");
+		return 1;
 	}
 	else if (strcmp(operation, "off") == 0)
 	{
-		printf("OK OFF STATE");
+		return 2;
 	}
 	else
 	{
 		send_help_info();
 		clear_command_buffer(command);
+		return 3;
 	}
-	printf("Change state operation: ");
-	printf(operation);
-	printf(RETURN_CARRIAGE);
-	printf(NEW_LINE);
+	
+}
+
+void tgl_relay(char *relay_number){
+	
+	char local_relay_number_buffer[3];
+	local_relay_number_buffer[0] = relay_number[0];
+	local_relay_number_buffer[1] = relay_number[1];
+	local_relay_number_buffer[2] = '\0';
+	
+	if (strcmp(local_relay_number_buffer, "01") == 0)
+	{
+		printf("RELAAAAAY NUMBEEER 1 toggled");
+		printf(RETURN_CARRIAGE);
+		printf(NEW_LINE);
+		TOGGLE_RELAY1();
+	}
+	else if (strcmp(local_relay_number_buffer, "02") == 0)
+	{
+			printf("RELAAAAAY NUMBEEER 2 toggled");
+			printf(RETURN_CARRIAGE);
+			printf(NEW_LINE);
+		TOGGLE_RELAY2();
+	}
+	else if (strcmp(local_relay_number_buffer, "03") == 0)
+	{
+		TOGGLE_RELAY3();
+	}
+	else if (strcmp(local_relay_number_buffer, "04") == 0)
+	{
+		TOGGLE_RELAY4();
+	}
+	else
+	{
+		send_help_info();
+	}
+}
+
+void turn_on_relay(char *relay_number){
+	if (strcmp(relay_number, "01") == 0)
+	{
+		TURN_ON_RELAY1();
+	}
+	else if (strcmp(relay_number, "02") == 0)
+	{
+		TURN_ON_RELAY2();
+	}
+	else if (strcmp(relay_number, "03") == 0)
+	{
+		TURN_ON_RELAY3();
+	}
+	else if (strcmp(relay_number, "04") == 0)
+	{
+		TURN_ON_RELAY4();
+	}
+	else
+	{
+		send_help_info();
+	}
+}
+
+void turn_off_relay(char *relay_number){
+	if (strcmp(relay_number, "01") == 0)
+	{
+		TURN_OFF_RELAY1();
+	}
+	else if (strcmp(relay_number, "02") == 0)
+	{
+		TURN_OFF_RELAY2();
+	}
+	else if (strcmp(relay_number, "03") == 0)
+	{
+		TURN_OFF_RELAY3();
+	}
+	else if (strcmp(relay_number, "04") == 0)
+	{
+		TURN_OFF_RELAY4();
+	}
+	else
+	{
+		send_help_info();
+	}
 }
