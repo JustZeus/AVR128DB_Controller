@@ -196,20 +196,23 @@ void tgl_relay(char *relay_number){
 	
 	if (strcmp(local_relay_number_buffer, "01") == 0)
 	{
-		printf("RELAAAAAY NUMBEEER 1 toggled");
+		printf("Relay 1 toggled");
 		printf(RETURN_CARRIAGE);
 		printf(NEW_LINE);
 		TOGGLE_RELAY1();
 	}
 	else if (strcmp(local_relay_number_buffer, "02") == 0)
 	{
-			printf("RELAAAAAY NUMBEEER 2 toggled");
-			printf(RETURN_CARRIAGE);
-			printf(NEW_LINE);
+		printf("Relay 2 toggled");
+		printf(RETURN_CARRIAGE);
+		printf(NEW_LINE);
 		TOGGLE_RELAY2();
 	}
 	else if (strcmp(local_relay_number_buffer, "03") == 0)
 	{
+		printf("Relay 3 toggled");
+		printf(RETURN_CARRIAGE);
+		printf(NEW_LINE);
 		TOGGLE_RELAY3();
 	}
 	else if (strcmp(local_relay_number_buffer, "04") == 0)
