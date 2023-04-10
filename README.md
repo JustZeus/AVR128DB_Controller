@@ -6,9 +6,16 @@ The purpose of this project is to create a serial programmable relay controller 
 
 The second parallel purpose is to demonstrate the C language bare metal programming for this microcontroller family using the AVR-GCC compiler and the Visual Studio Based IDE: Microchip Studio.
 
+**The target, the user will be able to:**
+- Command and program the controller via a USART CLI.
+- Program Time based routines using the I2C RTC.
+- Program temperature treshold based routings.
+
 ## Current State
 
 As 02/04/2023 the firmware allows the user to change the state of the relays manually using a USART CLI with argumented commands.
+
+The USART peripheral is configured to operate by interruption service routines. Leaving the main loop empty, this will help for future low power configurations.
 
 **For example:**
 
@@ -18,6 +25,12 @@ All commands must start with the $ sign, then the main command, followed by the 
 
 ![command line](/img/command_line_capture.png)
 
+**More Command examples**
+
+`$ ctrl 1,3,4 -on` _Will turn ON the selected Relays_
+
+
+`$ ctrl 3,4 -off` _Will turn OFF the selected Relays_
 ## Getting Started
 
 These instructions will guide you to get copy of the project up and running on your local machine for development and testing purposes. 
@@ -43,8 +56,11 @@ _**MIKROE**_
 
 Requirements for the software and other tools to build.
 
-_**MIKROE**_
+
 - [Microchip Studio 7.0.2594](https://www.microchip.com/en-us/tools-resources/develop/microchip-studio)
+- AVR-Dx_DFP 2.2.253
+- GCC AVR 8-Bit Toolchain (Windows) 3.7.0
+- [MPLAB® Data Visualizer](https://www.microchip.com/en-us/tools-resources/debug/mplab-data-visualizer)
 
 
 

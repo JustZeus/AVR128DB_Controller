@@ -1,9 +1,8 @@
-/*
- * clock_config.c
- *
- * Created: 11/02/2023 02:58:24 p. m.
- *  Author: Ricardo Zamudio
- */
+/** @file clock_config.c
+* 
+* @brief Internal clock config. functions
+* @par Author: Ricardo Zamudio C.
+*/ 
 
 #include "clock_config.h"
 

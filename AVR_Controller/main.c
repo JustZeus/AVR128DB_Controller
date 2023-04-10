@@ -1,12 +1,11 @@
-/*
- * AVR_Controller.c
- *
- * Created: 11/02/2023 02:49:44 p. m.
- * Author : Ricardo Zamudio
- * This is a demonstration code to prove the Bare metal
- * AVR micro controller programming from the Microchip Technology's
- * 8-bit AVRDB family
- */
+/** @file AVR_Controller.c
+* 
+* @brief This is a demonstration code to prove the bare metal
+* AVR micro controller programming from the Microchip Technology's
+* 8-bit AVRDB family.
+* For more infirmation check: https://github.com/JustZeus/AVR128DB_Controller
+* @par Author: Ricardo Zamudio. Created: 11/02/2023 02:49:44 p. m.
+*/ 
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -24,7 +23,7 @@ volatile char c;
 
 int main(void)
 {
-	set_internal_clock();
+	set_internal_clock(); // Config. the microcontroller's clock 
 	USART3_init();
 	global_configs();
 	printf("\r\nAVR-CONTROLLER, Version: 0.0.1, Ricardo Zamudio C. \r\n Command list: \r\n [ctrl] -controls the relay's states \r\n [show] -displays the actual states \r\n");
@@ -33,6 +32,9 @@ int main(void)
 	}
 }
 
+/*!
+ * @brief Interrupt Service routine for the third USART peripheral
+ */
 ISR(USART3_RXC_vect)
 {
 	toggle_status_led();

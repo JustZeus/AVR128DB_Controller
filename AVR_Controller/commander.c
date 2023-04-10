@@ -1,17 +1,15 @@
-/*
- * commander.c
+/** @file commander.c
  *
- * Created: 11/02/2023 10:14:04 p. m.
- *  Author: Ricardo Zamudio C
+ * @brief USART commander CLI
+ * @par Author: Ricardo Zamudio C.
  */
 
 #include "commander.h"
 
-
 void executeCommand(char *command)
 {
-	char starting_char = command[0];
-	starting_char == '$' ? command_switcher(command) : send_help_info();
+	char starting_char = command[0];									 // Get the starting char.
+	starting_char == '$' ? command_switcher(command) : send_help_info(); // Cherck for $ as the starting char, else send help info.
 }
 
 void send_help_info()
@@ -69,8 +67,7 @@ void set_relay_states(char *command)
 	int operation = get_operation(command);
 	char current_char[2];
 	volatile char relay_number[3];
-	 
-	 
+
 	do
 	{
 		current_char[0] = command[cursor];
@@ -82,21 +79,24 @@ void set_relay_states(char *command)
 			relay_number[0] = '0';
 			relay_number[1] = command[cursor - 1];
 			relay_number[2] = '\0';
-			
+
 			printf("Delimiter noticed, relay number encountered  ");
 			printf(relay_number);
 			printf(RETURN_CARRIAGE);
 			printf(NEW_LINE);
-			
-				if(operation == 0){
-					tgl_relay(relay_number);
-				}
-				if(operation == 1){
-					turn_on_relay(relay_number);
-				}
-				if(operation == 2){
-					turn_off_relay(relay_number);
-				}
+
+			if (operation == 0)
+			{
+				tgl_relay(relay_number);
+			}
+			if (operation == 1)
+			{
+				turn_on_relay(relay_number);
+			}
+			if (operation == 2)
+			{
+				turn_off_relay(relay_number);
+			}
 			index = 0;
 		}
 
@@ -118,7 +118,6 @@ void set_relay_states(char *command)
 			printf(NEW_LINE);
 			break;
 		}
-	
 
 	} while (current_char[0] != ' ');
 }
@@ -156,7 +155,8 @@ int read_operation(char *command, int cursor)
 	for (int index = 0; index < 4; index++)
 	{
 		operation[index] = command[index + cursor];
-		if(index==1 && command[index + cursor] ==  'n' ){
+		if (index == 1 && command[index + cursor] == 'n')
+		{
 			break;
 		}
 	}
@@ -184,16 +184,16 @@ int read_operation(char *command, int cursor)
 		clear_command_buffer(command);
 		return 3;
 	}
-	
 }
 
-void tgl_relay(char *relay_number){
-	
+void tgl_relay(char *relay_number)
+{
+
 	char local_relay_number_buffer[3];
 	local_relay_number_buffer[0] = relay_number[0];
 	local_relay_number_buffer[1] = relay_number[1];
 	local_relay_number_buffer[2] = '\0';
-	
+
 	if (strcmp(local_relay_number_buffer, "01") == 0)
 	{
 		printf("Relay 1 toggled");
@@ -225,7 +225,8 @@ void tgl_relay(char *relay_number){
 	}
 }
 
-void turn_on_relay(char *relay_number){
+void turn_on_relay(char *relay_number)
+{
 	if (strcmp(relay_number, "01") == 0)
 	{
 		TURN_ON_RELAY1();
@@ -248,7 +249,8 @@ void turn_on_relay(char *relay_number){
 	}
 }
 
-void turn_off_relay(char *relay_number){
+void turn_off_relay(char *relay_number)
+{
 	if (strcmp(relay_number, "01") == 0)
 	{
 		TURN_OFF_RELAY1();

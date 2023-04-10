@@ -1,9 +1,9 @@
-/*
- * USART_driver.h
- *
- * Created: 11/02/2023 03:24:45 p. m.
- *  Author: Ricardo Zamudio C.
- */
+/** @file USART_driver.h
+* 
+* @brief Header file for the csompact API for the third USART peripheral in the AVR128DBXX Microcontroller
+* @par Author: Ricardo Zamudio C.
+*/ 
+
 #define F_CPU (16000000UL) /* using default clock 4MHz*/
 #define MAX_COMMAND_LEN 20
 #include <avr/io.h>

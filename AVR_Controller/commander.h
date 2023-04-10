@@ -1,9 +1,8 @@
-/*
- * commander.h
- *
- * Created: 11/02/2023 10:13:49 p. m.
- *  Author: Ricardo Zamudio C.
- */
+/** @file commander.h
+* 
+* @brief Header file for the USART commander CLI 
+* @par Author: Ricardo Zamudio C.
+*/ 
 
 #include <avr/io.h>
 #include <stdio.h>

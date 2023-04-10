@@ -1,9 +1,8 @@
-/*
- * global_configs.h
- *
- * Created: 18/02/2023 09:22:04 p. m.
- *  Author: Ricardo Zamudio C.
- */
+/** @file global_configs.h
+* 
+* @brief Header file for the global microcontroller register configuration.
+* @par Author: Ricardo Zamudio C.
+*/ 
 
 #include <avr/io.h>
 #include <avr/xmega.h>
@@ -34,12 +33,12 @@
 #define TOGGLE_RELAY4() PORTD.OUTTGL = PIN0_bm
 
 /*!
- * @brief set the I/O PORT registers for the relays
- */
+* @brief set the I/O PORT registers for the relays
+*/
 void set_io_pins();
 /*!
- * @brief Call the multiple functions to initialize the desired configurations, enable global interrupts.
- */
+* @brief Call the multiple functions to initialize the desired configurations, enable global interrupts.
+*/
 void global_configs();
 
 #endif /* GLOBAL_CONFIGS_H_ */

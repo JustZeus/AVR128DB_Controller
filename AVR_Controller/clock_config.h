@@ -1,9 +1,8 @@
-/*
- * clock_config.h
- *
- * Created: 11/02/2023 02:59:05 p. m.
- *  Author: ihade
- */
+/** @file clock_config.h
+* 
+* @brief Header file for the internal clock config.
+* @par Author: Ricardo Zamudio C.
+*/ 
 
 #include <avr/io.h>
 #include <avr/xmega.h>

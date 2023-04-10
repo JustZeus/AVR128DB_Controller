@@ -1,11 +1,13 @@
-/*
- * global_configs.c
- *
- * Created: 18/02/2023 09:19:22 p. m.
- *  Author: Ricardo Zamudio C.
- */
-#include "global_configs.h"
+/** @file global_configs.c
+* 
+* @brief Global microcontroller register configuration.
+* @par Author: Ricardo Zamudio C.
+*/ 
 
+#include "global_configs.h"
+/*!
+* @brief set the I/O PORT registers for the relays
+*/
 void set_io_pins()
 {
 	PORTD.DIRSET = PIN4_bm; // RELAY 1
@@ -23,7 +25,9 @@ void set_io_pins()
 	PORTB.DIRSET = PIN3_bm; // ON BOARD LED (PB3) set as an output.
 	PORTB.OUTSET = PIN3_bm; // Set the default state (HIGH).
 }
-
+/*!
+* @brief Call the multiple functions to initialize the desired configurations, enable global interrupts.
+*/
 void global_configs()
 {
 	set_io_pins();
