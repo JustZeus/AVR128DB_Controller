@@ -6,6 +6,7 @@
  */
 
 #include <avr/io.h>
+#include <stdio.h>
 #include "global_configs.h"
 
 #ifndef COMMANDER_H_

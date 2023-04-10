@@ -6,7 +6,7 @@
  */
 
 #include "commander.h"
-#include <stdio.h>
+
 
 void executeCommand(char *command)
 {
