@@ -7,11 +7,27 @@
 #include "USART_driver.h"
 
 
+
+/*!
+* @brief Setup function to allow serial printing in the standard IO stream.
+* @param[in] c Char variable to be sent.
+* @param[in] stream FILE Stream object
+*
+*/
+int USART3_printChar(char c, FILE *stream)
+{
+	USART3_sendChar(c);
+	return 0;
+}
+FILE USART_stream = FDEV_SETUP_STREAM(USART3_printChar, NULL, _FDEV_SETUP_WRITE); // File stream object declaration
+
+
 /*!
 * @brief Initial register configurations to start the USART3 peripheral.
 * Set-up for a 9600 Baud rate.
 *
 */
+
 void USART3_init(void)
 {
 	PORTB.DIR |= PIN0_bm;  // Set PORTB_PIN0 (TX_USART2) as an output, setting the DIR registry
@@ -40,17 +56,6 @@ void USART3_sendChar(char c)
 	USART3.TXDATAL = c; // Write the c char variable in the TXDATAL buffer register.
 }
 
-/*!
-* @brief Setup function to allow serial printing in the standard IO stream.
-* @param[in] c Char variable to be sent.
-* @param[in] stream FILE Stream object
-* 
-*/
-int USART3_printChar(char c, FILE *stream)
-{
-	USART3_sendChar(c);
-	return 0;
-}
 
 
 /*!
@@ -66,4 +71,3 @@ uint8_t USART3_read()
 	return USART3.RXDATAL; 
 }
 
-FILE USART_stream = FDEV_SETUP_STREAM(USART3_printChar, NULL, _FDEV_SETUP_WRITE); // File stream object declaration

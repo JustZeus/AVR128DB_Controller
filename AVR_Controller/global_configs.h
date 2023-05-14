@@ -9,6 +9,7 @@
 #include <avr/interrupt.h>
 #include <util/atomic.h>
 
+
 #ifndef GLOBAL_CONFIGS_H_
 #define GLOBAL_CONFIGS_H_
 
@@ -31,6 +32,15 @@
 #define TOGGLE_RELAY2() PORTD.OUTTGL = PIN6_bm
 #define TOGGLE_RELAY3() PORTA.OUTTGL = PIN7_bm
 #define TOGGLE_RELAY4() PORTD.OUTTGL = PIN0_bm
+
+#define MSG_OK "\r\nOK\r\n"
+#define MAIN_COMMAND_LENGTH 5
+#define NUMBER_OF_RELAYS 4
+
+#define BLANK_SPACE " "
+#define NEW_LINE "\n"
+#define RETURN_CARRIAGE "\r"
+
 
 /*!
 * @brief set the I/O PORT registers for the relays

@@ -7,17 +7,11 @@
 #include <avr/io.h>
 #include <stdio.h>
 #include "global_configs.h"
+#include "SHT21_driver.h"
 
 #ifndef COMMANDER_H_
 #define COMMANDER_H_
 
-#define MSG_OK "\r\nOK\r\n"
-#define MAIN_COMMAND_LENGTH 5
-#define NUMBER_OF_RELAYS 4
-
-#define BLANK_SPACE " "
-#define NEW_LINE "\n"
-#define RETURN_CARRIAGE "\r"
 
 void executeCommand(char *command);
 void send_help_info();
@@ -32,4 +26,9 @@ int read_operation(char *command, int cursor);
 void tgl_relay(char *relay_number);
 void turn_on_relay(char *relay_number);
 void turn_off_relay(char *relay_number); 
+
+
+// Informative functions
+void show_temperature(char *command);
+
 #endif /* COMMANDER_H_ */

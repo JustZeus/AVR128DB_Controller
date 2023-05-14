@@ -14,6 +14,7 @@
 #include "USART_driver.h"
 #include "commander.h"
 #include "global_configs.h"
+#include "I2C_driver.h"
 
 #define toggle_status_led() PORTB.OUTTGL |= PIN3_bm;
 
@@ -26,6 +27,7 @@ int main(void)
 	set_internal_clock(); // Config. the microcontroller's clock 
 	USART3_init();
 	global_configs();
+	i2c_init();
 	printf("\r\nAVR-CONTROLLER, Version: 0.0.1, Ricardo Zamudio C. \r\n Command list: \r\n [ctrl] -controls the relay's states \r\n [show] -displays the actual states \r\n");
 	while (1)
 	{

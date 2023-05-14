@@ -24,6 +24,13 @@
 */
 void i2c_init();
 
+uint8_t i2c_0_SendData(uint8_t address, uint8_t *pData, uint8_t len); // returns how many bytes have been sent, -1 means NACK at address
+uint8_t i2c_0_GetData(uint8_t address, uint8_t *pData, uint8_t len); // returns how many bytes have been received, -1 means NACK at address
+/*!
+* @brief End the I2C Session by executing Acknowledge Action followed by issuing a Stop condition
+*/
+void i2c_EndSession(void);
+
 
 
 #endif /* I2C_DRIVER_H_ */

@@ -163,6 +163,12 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="SHT21_driver.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SHT21_driver.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="USART_driver.c">
       <SubType>compile</SubType>
     </Compile>

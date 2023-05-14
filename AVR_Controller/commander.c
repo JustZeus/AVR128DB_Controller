@@ -37,6 +37,7 @@ void command_switcher(char *command)
 	else if (strcmp(main_command, "show") == 0)
 	{
 		printf("OK, SHOW\r\n");
+		show_temperature(command);
 		clear_command_buffer(command);
 	}
 	else if (strcmp(main_command, "help") == 0)
@@ -271,4 +272,18 @@ void turn_off_relay(char *relay_number)
 	{
 		send_help_info();
 	}
+}
+
+
+//---------------------------------------------------------------
+//- Show informative functions-----------------------------------
+
+void show_temperature(char *command){
+	uint8_t error;
+	for (int i = 0; i<25; i++)
+	{
+		error = measure_SHT21_temp_not_HM();
+	}
+	
+	
 }
