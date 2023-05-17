@@ -21,7 +21,7 @@ uint8_t measure_SHT21_temp_not_HM(){
 	float f_celcius_temperature;
 	uint8_t command[1] = {TRIG_T_MEASUREMENT_POLL};
 	
-	sent_bytes = i2c_0_SendData((SHT21_ADDRESS << 1), command, 1);
+	sent_bytes = i2c_0_WriteData((SHT21_ADDRESS << 1), command, 1);
 	_delay_ms(85);
 	recieved_bytes = i2c_0_GetData((SHT21_ADDRESS << 1), sensor_data, 3);
 	i2c_EndSession();

@@ -274,16 +274,14 @@ void turn_off_relay(char *relay_number)
 	}
 }
 
-
 //---------------------------------------------------------------
 //- Show informative functions-----------------------------------
 
-void show_temperature(char *command){
+void show_temperature(char *command)
+{
 	uint8_t error;
-	for (int i = 0; i<25; i++)
+	for (int i = 0; i < 25; i++)
 	{
 		error = measure_SHT21_temp_not_HM();
 	}
-	
-	
 }

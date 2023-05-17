@@ -24,8 +24,22 @@
 */
 void i2c_init();
 
-uint8_t i2c_0_SendData(uint8_t address, uint8_t *pData, uint8_t len); // returns how many bytes have been sent, -1 means NACK at address
+/*!
+* @brief After the TWI initialization this function sends the data to the selected address, you must specify the data length
+* @param address 7-bit device address
+* @param pData uint8_t array with the 8 bits commands
+* @param len Length of the commands array
+*/
+uint8_t i2c_0_WriteData(uint8_t address, uint8_t *pData, uint8_t len); // returns how many bytes have been sent, -1 means NACK at address
+
+/*!
+* @brief After the TWI initialization this function reads the data from the selected address, you must specify the data length expected
+* @param address 7-bit device address
+* @param pData uint8_t array to store the recieved data 
+* @param len Length of the expected bytes
+*/
 uint8_t i2c_0_GetData(uint8_t address, uint8_t *pData, uint8_t len); // returns how many bytes have been received, -1 means NACK at address
+
 /*!
 * @brief End the I2C Session by executing Acknowledge Action followed by issuing a Stop condition
 */
